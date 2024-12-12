@@ -1,33 +1,59 @@
 import streamlit as st
-import joblib  # Assuming joblib is installed
+import pandas as pd
+from sklearn.model_selection import train_test_split
+import joblib  # Assuming you have joblib installed for model loading
 
-# Load the trained decision tree model
-model = joblib.load("mymodel.joblib")
+# Load the preprocessed data (assuming it's saved as "clean_test.csv")
+try:
+    df_test = pd.read_csv("clean_test.csv")
+except FileNotFoundError:
+    st.error("Error: clean_test.csv file not found. Please ensure it's in the same directory.")
+    exit()
 
-# Title and description for your app
-st.title("Diabetes Prediction App")
-st.write("Enter your information below to get a prediction on diabetes.")
+# Model loading
+try:
+    model = joblib.load("mymodel.joblib")
+except FileNotFoundError:
+    st.error("Error: mymodel.joblib file not found. Please ensure it's trained and saved.")
+    exit()
 
-# User input fields for each feature
-age = st.number_input("Age (years)")
-glucose = st.number_input("Blood Glucose Level (mg/dL)")
-blood_pressure = st.number_input("Blood Pressure (mmHg)")
-skin_thickness = st.number_input("Skin Thickness (mm)")
-insulin = st.number_input("Insulin Level (μU/mL)")
-bmi = st.number_input("Body Mass Index (kg/m^2)")
-diabetes_pedigree = st.number_input("Diabetes Pedigree Function")
+# Streamlit App Structure
+st.title("Diabetes Prediction")  # Replace "Coffe" if not relevant to your data
 
-# Button for user to submit their input
-submit_button = st.button("Predict")
+# Display the test dataset (preprocessed data for prediction)
+st.write("**Test Dataset** (for reference)")
+st.dataframe(df_test.style.set_properties(**{'background-color': 'lightblue'}))
 
-# Prediction logic (executed when the user clicks the button)
-if submit_button:
-    user_data = [[age, glucose, blood_pressure, skin_thickness, insulin, bmi, diabetes_pedigree]]
-    prediction = model.predict(user_data)[0]
+# **Check for missing features in user input**
+missing_features = set(model.feature_names_in_) - set(df_test.columns)
 
-    # Display the prediction
-    if prediction == 1:
-        st.write("**Prediction:** You are likely Diabetic.")
+if missing_features:
+    st.error(f"Error: The following features are missing from the input data but were used during training: {', '.join(missing_features)}")
+    st.stop()  # Halt execution if essential features are missing
+
+# User Input Section (replace with relevant features from your model)
+st.header("Enter Patient Information:")
+
+# **Ensure user input covers all required features**
+user_data = {}
+for feature in model.feature_names_in_:
+    if feature in df_test.columns:
+        user_data[feature] = st.number_input(feature, min_value=df_test[feature].min(), max_value=df_test[feature].max())
     else:
-        st.write("**Prediction:** You are likely Non-Diabetic.")
-        st.write("**Note:** This is just a prediction based on the model. Please consult a medical professional for any diagnosis.")
+        st.warning(f"Feature '{feature}' not found in input data. Prediction may be inaccurate.")
+
+# Prepare user input for prediction
+user_data = pd.DataFrame(user_data).transpose()  # Create DataFrame from user input
+
+# Make prediction using the loaded model
+prediction = model.predict(user_data)
+
+# Display prediction result
+if prediction[0] == 0:
+    st.success("**Prediction:** Low probability of diabetes.")
+elif prediction[0] == 1:
+    st.warning("**Prediction:** Medium probability of diabetes. Please consult a doctor.")
+else:
+    st.error("**Prediction:** High probability of diabetes. Please consult a doctor immediately.")
+
+# Note: Consider adding a disclaimer that this is not a substitute for medical advice.
