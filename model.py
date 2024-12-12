@@ -6,6 +6,14 @@ total_data = pd.read_csv("https://raw.githubusercontent.com/4GeeksAcademy/decisi
 
 total_data = total_data.drop_duplicates().reset_index(drop = True)
 
+
+
+
+
+
+
+
+
 # Selección de características
 
 from sklearn.feature_selection import SelectKBest
