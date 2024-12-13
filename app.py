@@ -164,37 +164,37 @@ if model is not None:
         st.error(f"Error plotting decision tree: {e}")
     st.pyplot(fig_tree)
 
-st.write("En base a los resultados anteriores podemos indicar que:
+st.write("En base a los resultados anteriores podemos indicar que:")
 
-+ El arbol posee 14 niveles.
-+ Tenemos 105 nodos terminales.
-+ En cada nodo se aprecia el valor del indice de Gini, criterio utilizado para medir el grado de pudeza de cada nodo. Mientras mas pequeño el indice de Gini implica un nodo mas puro.
-+ Todos los nodos terminales poseen un indice de Gini cuyo valor es tan despreciable que es considerado nulo.
+st.write(" + El arbol posee 14 niveles.")
+st.write(" + Tenemos 105 nodos terminales.")
+st.write(" + En cada nodo se aprecia el valor del indice de Gini, criterio utilizado para medir el grado de pudeza de cada nodo. Mientras mas pequeño el indice de Gini implica un nodo mas puro.")
+st.write("+ Todos los nodos terminales poseen un indice de Gini cuyo valor es tan despreciable que es considerado nulo.")
 
-Interpretacion del nodo inicial (raiz o padre):
+sr.write("Interpretacion del nodo inicial (raiz o padre):")
 
-La variable que tiene mayor influencia en la presencia de la diabetes es la concentracion de glucosa, la cantidad de datos observados en el nodo raiz es de 614, de aqui se desprende el primer nivel para el cual se tiene dos alternativas:
+st.write("La variable que tiene mayor influencia en la presencia de la diabetes es la concentracion de glucosa, la cantidad de datos observados en el nodo raiz es de 614, de aqui se desprende el primer nivel para el cual se tiene dos alternativas:")
 
-+ 1. La presencia de la diabetes si esta determinada por la glucosa y esto depende de la edad.
-+ 2. La presencia de la diabetes no esta determinada por la glucosa y esta depende del Indice de Masa Corporal.
-")
-
+st.write(" + 1. La presencia de la diabetes si esta determinada por la glucosa y esto depende de la edad.")
+st.write(" + 2. La presencia de la diabetes no esta determinada por la glucosa y esta depende del Indice de Masa Corporal.")
 
 
 
-# st.write("Enter your information below to get a prediction on diabetes.")
+st.subheader("Predicción de Modelo")
+
+st.write("Ingrese su información para obtener una predicción sobre la diabetes.")
 
 # User input fields for prediction
-age = st.number_input("Age (years)")
-glucose = st.number_input("Blood Glucose Level (mg/dL)")
-blood_pressure = st.number_input("Blood Pressure (mmHg)")
-skin_thickness = st.number_input("Skin Thickness (mm)")
-insulin = st.number_input("Insulin Level (μU/mL)")
-bmi = st.number_input("Body Mass Index (kg/m^2)")
-diabetes_pedigree = st.number_input("Diabetes Pedigree Function")
+age = st.number_input("Edad (años)")
+glucose = st.number_input("Nivel de glucosa en sangre (mg/dL)")
+blood_pressure = st.number_input("Presión arterial (mmHg)")
+skin_thickness = st.number_input("Grosor de la piel (mm)")
+insulin = st.number_input("Nivel de insulina (μU/mL)")
+bmi = st.number_input("Índice de masa corporal (kg/m^2)")
+diabetes_pedigree = st.number_input("Función del pedigrí de la diabetes")
 
 # Button for prediction and logic
-submit_button = st.button("Predict")
+submit_button = st.button("Predecir")
 if submit_button:
     user_data = [[age, glucose, blood_pressure, skin_thickness, insulin, bmi, diabetes_pedigree]]
 
@@ -208,7 +208,7 @@ if submit_button:
 
     # Show prediction
     if prediction == 1:
-        st.write("**Prediction:** You are likely Diabetic.")
+        st.write("** Predicción: ** Es probable que sea diabético(a).")
     else:
-        st.write("**Prediction:** You are likely Non-Diabetic.")
-    st.write("**Note:** This is just a prediction based on the model. Please consult a medical professional for any diagnosis.")
+        st.write("**Predicción:** Es probable que no sea diabético..")
+    st.write("**Nota:** Esta es solo una predicción basada en el modelo. Consulte a un profesional médico para cualquier diagnóstico.")
