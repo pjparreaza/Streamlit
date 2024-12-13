@@ -4,7 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import joblib
 from sklearn.tree import DecisionTreeClassifier
-from sklearn import tree
+# from sklearn import tree
 from sklearn.feature_selection import SelectKBest
 from sklearn.model_selection import train_test_split
 
