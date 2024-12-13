@@ -94,20 +94,20 @@ st.write(" + Variable `Age`: la distribucion de las edades de los pacientes pose
 st.write(" + Variable `Outcome`: la variable de clase (0 o 1), siendo 0 negativo en diabetes y 1, positivo por ser de conteo revela que la poblacion de estudio posee una poblacion sana de diabetes superior a la poblacion que sufre de diabeles.")
 
 
-st.subheader("Estadisticos Multivariantes")
+# st.subheader("Estadisticos Multivariantes")
 
 # Pairplot
-st.write("Pairplot:")
-fig_pairplot = sns.pairplot(data=df_ch)
-st.pyplot(fig_pairplot)
+#st.write("Pairplot:")
+# fig_pairplot = sns.pairplot(data=df_ch)
+# st.pyplot(fig_pairplot)
 
 # Heatmap de correlación
-st.write("Heatmap de correlación:")
+st.write("Matriz de correlación:")
 fig_corr, ax_corr = plt.subplots(figsize=(15, 15))
 sns.heatmap(df_ch.corr(), annot=True, fmt=".2f", ax=ax_corr)
 st.pyplot(fig_corr)
 
-st.write(" La primera graficas nos permite ver la relación que poseen las variables, la cual no parece ser lineal. Sin embargo, al observar la correlacion, se puede decir que, las variables con mayor relacion moderada (<60%) en el mismo sentido son, en primera instancia es las variable edad con numero de embarazos, la cual posee un 54% (0,54) seguida y la glucosa con la variable de estado de la diabetes, la cual tiene un 47% (0,47).")
+st.write(" Al observar la correlacion, se puede decir que, las variables con mayor relacion moderada (<60%) en el mismo sentido son, en primera instancia es las variable edad con numero de embarazos, la cual posee un 54% (0,54) seguida y la glucosa con la variable de estado de la diabetes, la cual tiene un 47% (0,47).")
 
 
 st.subheader("Construcción un modelo de árbol de decisión")
