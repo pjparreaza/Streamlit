@@ -110,7 +110,7 @@ st.pyplot(fig_corr)
 st.write(" Al observar la correlacion, se puede decir que, las variables con mayor relacion moderada (<60%) en el mismo sentido son, en primera instancia es las variable edad con numero de embarazos, la cual posee un 54% (0,54) seguida y la glucosa con la variable de estado de la diabetes, la cual tiene un 47% (0,47).")
 
 
-st.subheader("Construcción un modelo de árbol de decisión")
+# st.subheader("Construcción un modelo de árbol de decisión")
 
 # st.write("Procedamos a vizualizar la relacion las variables que son consideradas independientes respecto al objetivo, para ello realizaremos una grafica llamama `parallel_coordinates`")
 
@@ -153,29 +153,29 @@ except FileNotFoundError:
     model = None  # Set model to None to prevent errors in prediction section
 
 # Decision tree plot (if model loaded successfully)
-if model is not None:
+# if model is not None:
 
-    st.write("Procesamos a observar nuestro arbol de decisión:")
-    fig_tree = plt.figure(figsize=(15, 15))
-    try:  # Handle potential errors during tree plotting
-        tree.plot_tree(model, feature_names=X_train.columns, class_names=["0", "1", "2"], filled=True)
-    except Exception as e:
-        st.error(f"Error plotting decision tree: {e}")
-    st.pyplot(fig_tree)
+#    st.write("Procesamos a observar nuestro arbol de decisión:")
+#    fig_tree = plt.figure(figsize=(15, 15))
+#    try:  # Handle potential errors during tree plotting
+#       tree.plot_tree(model, feature_names=X_train.columns, class_names=["0", "1", "2"], filled=True)
+#    except Exception as e:
+#        st.error(f"Error plotting decision tree: {e}")
+#    st.pyplot(fig_tree)
 
-st.write("En base a los resultados anteriores podemos indicar que:")
+# st.write("En base a los resultados anteriores podemos indicar que:")
 
-st.write(" + El arbol posee 14 niveles.")
-st.write(" + Tenemos 105 nodos terminales.")
-st.write(" + En cada nodo se aprecia el valor del indice de Gini, criterio utilizado para medir el grado de pudeza de cada nodo. Mientras mas pequeño el indice de Gini implica un nodo mas puro.")
-st.write("+ Todos los nodos terminales poseen un indice de Gini cuyo valor es tan despreciable que es considerado nulo.")
+# st.write(" + El arbol posee 14 niveles.")
+# st.write(" + Tenemos 105 nodos terminales.")
+# st.write(" + En cada nodo se aprecia el valor del indice de Gini, criterio utilizado para medir el grado de pudeza de cada nodo. Mientras mas pequeño el indice de Gini implica un nodo mas puro.")
+# st.write("+ Todos los nodos terminales poseen un indice de Gini cuyo valor es tan despreciable que es considerado nulo.")
 
-st.write("Interpretacion del nodo inicial (raiz o padre):")
+# st.write("Interpretacion del nodo inicial (raiz o padre):")
 
-st.write("La variable que tiene mayor influencia en la presencia de la diabetes es la concentracion de glucosa, la cantidad de datos observados en el nodo raiz es de 614, de aqui se desprende el primer nivel para el cual se tiene dos alternativas:")
+# st.write("La variable que tiene mayor influencia en la presencia de la diabetes es la concentracion de glucosa, la cantidad de datos observados en el nodo raiz es de 614, de aqui se desprende el primer nivel para el cual se tiene dos alternativas:")
 
-st.write(" + 1. La presencia de la diabetes si esta determinada por la glucosa y esto depende de la edad.")
-st.write(" + 2. La presencia de la diabetes no esta determinada por la glucosa y esta depende del Indice de Masa Corporal.")
+# st.write(" + 1. La presencia de la diabetes si esta determinada por la glucosa y esto depende de la edad.")
+# st.write(" + 2. La presencia de la diabetes no esta determinada por la glucosa y esta depende del Indice de Masa Corporal.")
 
 
 
