@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 import joblib
 # from sklearn.tree import DecisionTreeClassifier
 # from sklearn import tree
-from sklearn.feature_selection import SelectKBest
-from sklearn.model_selection import train_test_split
+# from sklearn.feature_selection import SelectKBest
+# from sklearn.model_selection import train_test_split
 
 # Title and description for your app
 st.title("Aplicación para predecir la diabetes")
@@ -121,36 +121,36 @@ st.write(" Al observar la correlacion, se puede decir que, las variables con may
 # st.pyplot(fig_pc)
 
 
-X = df_ch.drop("Outcome", axis = 1)
-y = df_ch["Outcome"]
+#X = df_ch.drop("Outcome", axis = 1)
+#y = df_ch["Outcome"]
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42)
+#X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42)
 
-selection_model = SelectKBest(k = 7)
-selection_model.fit(X_train, y_train)
+#selection_model = SelectKBest(k = 7)
+#selection_model.fit(X_train, y_train)
 
-selected_columns = X_train.columns[selection_model.get_support()]
-X_train_sel = pd.DataFrame(selection_model.transform(X_train), columns = selected_columns)
-X_test_sel = pd.DataFrame(selection_model.transform(X_test), columns = selected_columns)
+#selected_columns = X_train.columns[selection_model.get_support()]
+#X_train_sel = pd.DataFrame(selection_model.transform(X_train), columns = selected_columns)
+#X_test_sel = pd.DataFrame(selection_model.transform(X_test), columns = selected_columns)
 
-train_data = X_train_sel
-test_data = X_test_sel
+#train_data = X_train_sel
+#test_data = X_test_sel
 
-X_train_sel["Outcome"] = y_train.values
-X_test_sel["Outcome"] = y_test.values
+#X_train_sel["Outcome"] = y_train.values
+#X_test_sel["Outcome"] = y_test.values
 
-X_train = train_data.drop(["Outcome"], axis = 1)
-y_train = train_data["Outcome"]
-X_test = test_data.drop(["Outcome"], axis = 1)
-y_test = test_data["Outcome"]
+#X_train = train_data.drop(["Outcome"], axis = 1)
+#y_train = train_data["Outcome"]
+#X_test = test_data.drop(["Outcome"], axis = 1)
+#y_test = test_data["Outcome"]
 
 
 # Load and display decision tree model (assuming 'mymodel.joblib' exists)
-try:
-    model = joblib.load("mymodel.joblib")
-except FileNotFoundError:
-    st.error("Model 'mymodel.joblib' not found. Please train the model first.")
-    model = None  # Set model to None to prevent errors in prediction section
+#try:
+#    model = joblib.load("mymodel.joblib")
+#except FileNotFoundError:
+#    st.error("Model 'mymodel.joblib' not found. Please train the model first.")
+#    model = None  # Set model to None to prevent errors in prediction section
 
 # Decision tree plot (if model loaded successfully)
 # if model is not None:
@@ -183,6 +183,9 @@ st.subheader("Predicción de Modelo")
 
 st.write("Ingrese su información para obtener una predicción sobre la diabetes.")
 
+model = joblib.load("mymodel.joblib")
+
+
 # User input fields for prediction
 age = st.number_input("Edad (años)")
 glucose = st.number_input("Nivel de glucosa en sangre (mg/dL)")
@@ -193,21 +196,38 @@ bmi = st.number_input("Índice de masa corporal (kg/m^2)")
 diabetes_pedigree = st.number_input("Función del pedigrí de la diabetes")
 
 # Button for prediction and logic
+# submit_button = st.button("Predecir")
+# if submit_button:
+#    user_data = [[age, glucose, blood_pressure, skin_thickness, insulin, bmi, diabetes_pedigree]]
+#
+#    # Train the model if it's not loaded (replace with your actual training data)
+#    if model is None:
+#        X_train, X_test, y_train, y_test = train_test_split(df_ch.drop("Outcome", axis=1), df_ch["Outcome"], test_size=0.2, random_state=42)
+#        X_train, y_train = select_features(X_train.copy())  # Select features for training
+#        model = train_model(X_train, y_train)
+#
+#    prediction = model.predict(user_data)[0]
+
+#    # Show prediction
+#    if prediction == 1:
+#        st.write("** Predicción: ** Es probable que sea diabético(a).")
+#    else:
+#        st.write("**Predicción:** Es probable que no sea diabético.")
+
+#    st.write("**Nota:** Esta es solo una predicción basada en el modelo. Consulte a un profesional médico para cualquier diagnóstico.")
+
+
+# Button for user to submit their input
 submit_button = st.button("Predecir")
+
+# Prediction logic (executed when the user clicks the button)
 if submit_button:
     user_data = [[age, glucose, blood_pressure, skin_thickness, insulin, bmi, diabetes_pedigree]]
-
-    # Train the model if it's not loaded (replace with your actual training data)
-    if model is None:
-        X_train, X_test, y_train, y_test = train_test_split(df_ch.drop("Outcome", axis=1), df_ch["Outcome"], test_size=0.2, random_state=42)
-        X_train, y_train = select_features(X_train.copy())  # Select features for training
-        model = train_model(X_train, y_train)
-
     prediction = model.predict(user_data)[0]
 
-    # Show prediction
+    # Display the prediction
     if prediction == 1:
         st.write("** Predicción: ** Es probable que sea diabético(a).")
     else:
         st.write("**Predicción:** Es probable que no sea diabético.")
-    st.write("**Nota:** Esta es solo una predicción basada en el modelo. Consulte a un profesional médico para cualquier diagnóstico.")
+        st.write("**Nota:** Esta es solo una predicción basada en el modelo. Consulte a un profesional médico para cualquier diagnóstico.")
