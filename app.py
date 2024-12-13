@@ -41,7 +41,7 @@ st.write(" * Outcome. Variable de clase (0 o 1), siendo 0 negativo en diabetes y
 # Graficos EDA
 st.header("EDA completo")
 
-st.markdown("### Estadisticos univariados")
+st.markdown("### Estadisticos")
 # Función para crear histogramas
 def plot_histograms(data, cols, rows, figsize=(15, 10)):
     fig, axes = plt.subplots(rows, cols, figsize=figsize)
