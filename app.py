@@ -112,13 +112,13 @@ st.write(" Al observar la correlacion, se puede decir que, las variables con may
 
 st.subheader("Construcción un modelo de árbol de decisión")
 
-st.write("Procedamos a vizualizar la relacion las variables que son consideradas independientes respecto al objetivo, para ello realizaremos una grafica llamama `parallel_coordinates`")
+# st.write("Procedamos a vizualizar la relacion las variables que son consideradas independientes respecto al objetivo, para ello realizaremos una grafica llamama `parallel_coordinates`")
 
 # Graficos del parallel_coordinates
-st.write("Parallel Coordinates Plot:")
-fig_pc = plt.figure(figsize=(12, 6))
-pd.plotting.parallel_coordinates(df_ch, "Outcome", color=["#E58139", "#39E581", "#8139E5"])
-st.pyplot(fig_pc)
+# st.write("Parallel Coordinates Plot:")
+# fig_pc = plt.figure(figsize=(12, 6))
+# pd.plotting.parallel_coordinates(df_ch, "Outcome", color=["#E58139", "#39E581", "#8139E5"])
+# st.pyplot(fig_pc)
 
 
 X = df_ch.drop("Outcome", axis = 1)
