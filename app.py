@@ -20,7 +20,7 @@ def load_data():
 
 df_ch = load_data()
 
-st.write("Este conjunto de datos proviene originalmente del Instituto Nacional de Diabetes y Enfermedades Digestivas y Renales. El objetivo es predecir en base a medidas diagnósticas si un paciente tiene o no diabetes, para lo cual procedemos a realizar un arbon de decisión")
+st.write("Este conjunto de datos proviene originalmente del Instituto Nacional de Diabetes y Enfermedades Digestivas y Renales. El objetivo es predecir en base a medidas diagnósticas si un paciente tiene o no diabetes, para lo cual procedemos a realizar un arbol de decisión")
 
 # Mostrar los datos en un DataFrame
 st.write("Procederemos a mostrar los datos cargados:")
@@ -171,7 +171,7 @@ st.write(" + Tenemos 105 nodos terminales.")
 st.write(" + En cada nodo se aprecia el valor del indice de Gini, criterio utilizado para medir el grado de pudeza de cada nodo. Mientras mas pequeño el indice de Gini implica un nodo mas puro.")
 st.write("+ Todos los nodos terminales poseen un indice de Gini cuyo valor es tan despreciable que es considerado nulo.")
 
-sr.write("Interpretacion del nodo inicial (raiz o padre):")
+st.write("Interpretacion del nodo inicial (raiz o padre):")
 
 st.write("La variable que tiene mayor influencia en la presencia de la diabetes es la concentracion de glucosa, la cantidad de datos observados en el nodo raiz es de 614, de aqui se desprende el primer nivel para el cual se tiene dos alternativas:")
 
@@ -210,5 +210,5 @@ if submit_button:
     if prediction == 1:
         st.write("** Predicción: ** Es probable que sea diabético(a).")
     else:
-        st.write("**Predicción:** Es probable que no sea diabético..")
+        st.write("**Predicción:** Es probable que no sea diabético.")
     st.write("**Nota:** Esta es solo una predicción basada en el modelo. Consulte a un profesional médico para cualquier diagnóstico.")
