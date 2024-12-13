@@ -121,7 +121,6 @@ pd.plotting.parallel_coordinates(df_ch, "Outcome", color=["#E58139", "#39E581", 
 st.pyplot(fig_pc)
 
 
-
 X = df_ch.drop("Outcome", axis = 1)
 y = df_ch["Outcome"]
 
